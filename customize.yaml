@@ -1,0 +1,25 @@
+light.0xf0d1b80000037e7f_light_3:
+  brightness: 255
+sensor.alerta_freenas:
+  icon: mdi:alert
+sensor.reporte:
+  icon: mdi:harddisk
+sensor.freenas_version:
+  icon: mdi:nas
+sensor.freenas_mensaje_de_alerta:
+  icon: mdi:comment-alert-outline
+sensor.fn_trunk_pct_used:
+  friendly_name: Porcentaje usado
+  icon: mdi:cup
+sensor.transmission_started_torrents:
+  icon: mdi:progress-download
+sensor.transmission_completed_torrents:
+  icon: mdi:download-multiple
+sensor.transmission_down_speed:
+  icon: mdi:speedometer
+switch.lampara_frank:
+  icon: mdi:desk-lamp
+switch.luz_alacena:
+  icon: mdi:led-strip
+binary_sensor.refrigerador_atras:
+  icon: mdi:fridge

@@ -1,0 +1,132 @@
+- id: update_networkmap
+  alias: Zigbee Map aktualisieren
+  trigger:
+  - hours: '1'
+    platform: time_pattern
+    seconds: '0'
+  action:
+  - service: zigbee2mqtt_networkmap.update
+  hide_entity: true
+- alias: Zigbee2mqtt Log Level
+  initial_state: 'on'
+  trigger:
+  - platform: state
+    entity_id: input_select.zigbee2mqtt_log_level
+    to: debug
+  - platform: state
+    entity_id: input_select.zigbee2mqtt_log_level
+    to: warn
+  - platform: state
+    entity_id: input_select.zigbee2mqtt_log_level
+    to: error
+  - platform: state
+    entity_id: input_select.zigbee2mqtt_log_level
+    to: info
+  action:
+  - service: mqtt.publish
+    data:
+      payload_template: '{{ states(''input_select.zigbee2mqtt_log_level'') }}'
+      topic: zigbee2mqtt/bridge/config/log_level
+  id: 0836866d1fd242d8b4fd765ec1c00252
+- id: enable_zigbee_join
+  alias: Enable Zigbee joining
+  trigger:
+  - entity_id: input_boolean.zigbee_permit_join
+    platform: state
+    to: 'on'
+  action:
+  - data:
+      entity_id: switch.zigbee2mqtt_main_join
+    service: switch.turn_on
+  - data:
+      entity_id: timer.zigbee_permit_join
+    service: timer.start
+  hide_entity: true
+- id: disable_zigbee_join
+  alias: Disable Zigbee joining
+  hide_entity: true
+  trigger:
+  - entity_id: input_boolean.zigbee_permit_join
+    platform: state
+    to: 'off'
+  action:
+  - data:
+      payload: 'false'
+      topic: zigbee2mqtt/bridge/config/permit_join
+    service: mqtt.publish
+  - data:
+      entity_id: timer.zigbee_permit_join
+    service: timer.cancel
+- id: disable_zigbee_join_timer
+  alias: Disable Zigbee joining by timer
+  hide_entity: true
+  trigger:
+  - platform: event
+    event_type: timer.finished
+    event_data:
+      entity_id: timer.zigbee_permit_join
+  action:
+  - service: mqtt.publish
+    data:
+      topic: zigbee2mqtt/bridge/config/permit_join
+      payload: 'false'
+  - service: input_boolean.turn_off
+    data:
+      entity_id: input_boolean.zigbee_permit_join
+- id: '1550993584515'
+  alias: Frank dormir
+  trigger:
+  - entity_id: input_boolean.frank_cama
+    from: 'off'
+    platform: state
+    to: 'on'
+  condition: []
+  action:
+  - data:
+      entity_id: scene.frank_cama
+    service: scene.turn_on
+- id: '1550993676832'
+  alias: Frank Cuarto
+  trigger:
+  - entity_id: input_boolean.frank_cama
+    from: 'on'
+    platform: state
+    to: 'off'
+  condition: []
+  action:
+  - data:
+      entity_id: scene.frank_despierto
+    service: scene.turn_on
+- id: '1552087068570'
+  alias: Bateria mazda baja
+  trigger:
+  - below: '20'
+    entity_id: sensor.mazda
+    platform: numeric_state
+  condition: []
+  action:
+  - data:
+      title: Mazda 3
+    service: notify.casa
+- id: '1556352641416'
+  alias: Lampara Frank toggle
+  trigger:
+  - platform: mqtt
+    topic: zigbee2mqtt/0x00158d00020416a7
+  condition:
+  - condition: template
+    value_template: '{{ "single" == trigger.payload_json.click }}'
+  action:
+  - entity_id: switch.lampara_frank
+    service: switch.toggle
+- id: '1558238725261'
+  alias: Luz Frank toggle
+  trigger:
+  - platform: mqtt
+    topic: zigbee2mqtt/0x00158d00020416a7
+  condition:
+  - condition: template
+    value_template: '{{ "double" == trigger.payload_json.click }}'
+  action:
+  - entity_id: light.lampara_frank
+    service: light.toggle
