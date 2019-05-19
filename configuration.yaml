@@ -50,6 +50,11 @@ panel_iframe:
      title: 'Zigbee Map'
      url: '/local/zigbee2mqtt_networkmap/map.html'
      icon: 'mdi:graphql'
+   cloud9:
+      title: 'Cloud9'
+      url: 'http://192.168.1.20:8321/ide.html'
+      icon: 'mdi:code-braces'
+
 
 stream:
 
