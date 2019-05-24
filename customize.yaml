@@ -23,3 +23,6 @@ switch.luz_alacena:
   icon: mdi:led-strip
 binary_sensor.refrigerador_atras:
   icon: mdi:fridge
+light.c44f3381b70f_192_168_1_226:
+  friendly_name: LUZ LED
+  icon: mdi:led-strip

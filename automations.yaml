@@ -98,16 +98,10 @@
       entity_id: scene.frank_despierto
     service: scene.turn_on
 - id: '1552087068570'
-  alias: Bateria mazda baja
-  trigger:
-  - below: '20'
-    entity_id: sensor.mazda
-    platform: numeric_state
+  alias: ''
+  trigger: []
   condition: []
-  action:
-  - data:
-      title: Mazda 3
-    service: notify.casa
+  action: []
 - id: '1556352641416'
   alias: Lampara Frank toggle
   trigger:
@@ -120,7 +114,7 @@
   - entity_id: switch.lampara_frank
     service: switch.toggle
 - id: '1558238725261'
-  alias: Luz Frank toggle
+  alias: gfd
   trigger:
   - platform: mqtt
     topic: zigbee2mqtt/0x00158d00020416a7
@@ -128,5 +122,64 @@
   - condition: template
     value_template: '{{ "double" == trigger.payload_json.click }}'
   action:
-  - entity_id: light.lampara_frank
-    service: light.toggle
+  - data:
+      entity_id: light.luz_bano
+    entity_id: light.lampara_frank
+    service: light.turn_off
+- id: '1558509588104'
+  alias: Luz pasillo  - on
+  trigger:
+  - entity_id: binary_sensor.0x00158d000257f589_occupancy
+    platform: state
+    to: 'on'
+  condition: []
+  action:
+  - data:
+      entity_id: light.0xf0d1b80000037209_light
+    service: light.turn_on
+- id: '1558509685957'
+  alias: Luz bano - on
+  trigger:
+  - entity_id: binary_sensor.0x00158d0002d43d30_occupancy
+    platform: state
+    to: 'on'
+  condition: []
+  action:
+  - data:
+      entity_id: light.luz_bano
+    service: light.turn_on
+- id: '1558509978797'
+  alias: Luz pasillo off
+  trigger:
+  - entity_id: binary_sensor.0x00158d000257f589_occupancy
+    for: 00:01:00
+    platform: state
+    to: 'off'
+  condition: []
+  action:
+  - data:
+      entity_id: light.0xf0d1b80000037209_light
+    service: light.turn_off
+- id: '1558510043368'
+  alias: luz bano - off
+  trigger:
+  - entity_id: binary_sensor.0x00158d0002d43d30_occupancy
+    for: 00:35:00
+    platform: state
+    to: 'off'
+  condition: []
+  action:
+  - data:
+      entity_id: light.luz_bano
+    service: light.turn_off
+- id: '1558510472016'
+  alias: New home assistant update
+  trigger:
+  - entity_id: updater.updater
+    platform: state
+  condition: []
+  action:
+  - data:
+      message: Home Assistant  {{ states.updater.updater.state }}  is now available.
+      title: HA Update
+    service: notify.casa

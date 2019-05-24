@@ -18,7 +18,7 @@ history:
 logbook:
 
 
-# Cloud
+# Cloud :) :) :) :)
 cloud:
   google_actions:
     filter:
@@ -42,9 +42,9 @@ cloud:
 config:
 
 webhook:
- 
+
 zigbee2mqtt_networkmap:
- 
+
 panel_iframe:
    networkmap:
      title: 'Zigbee Map'
@@ -127,7 +127,7 @@ sensor:
       fn_trunk_pct_used:
         value_template: '{{ states.sensor.reporte.attributes["used_pct"].title() }}'
         entity_id: sensor.fn_trunk_report
-      
+
   - platform: rest
     name: Alerta Freenas
     resource: http://192.168.1.4/api/v1.0/system/alert/?format=json
@@ -137,7 +137,7 @@ sensor:
     authentication: basic
     headers:
       Content-Type: application/json
-  
+
   - platform: rest
     name: Freenas mensaje de alerta
     resource: http://192.168.1.4/api/v1.0/system/alert/?format=json
@@ -147,7 +147,7 @@ sensor:
     authentication: basic
     headers:
       Content-Type: application/json
-  
+
   - platform: rest
     name: Freenas version
     json_attributes:
@@ -188,7 +188,7 @@ weather:
     mode: daily
 
 
-binary_sensor:   
+binary_sensor:
   - platform: mqtt
     state_topic: "tele/sonoff_rf_frank/RESULT"
     name: 'Movimiento Baño'
@@ -206,7 +206,7 @@ binary_sensor:
     payload_off: '8115E7'
     device_class: door
     qos: 1
-    
+
   - platform: mqtt
     state_topic: "tele/sonoff_rf_sala/RESULT"
     name: 'Refrigerador atras'
@@ -215,7 +215,7 @@ binary_sensor:
     payload_off: '18230E'
     device_class: door
     qos: 1
-    
+
   - platform: mqtt
     state_topic: "tele/sonoff_rf_sala/RESULT"
     name: 'Alacena'
@@ -242,7 +242,7 @@ switch:
     payload_on: "ON"
     payload_off: "OFF"
     retain: true
-    
+
   - platform: mqtt
     name: "Luz alacena"
     state_topic: "stat/sonoff_alacena/POWER"
@@ -250,7 +250,7 @@ switch:
     payload_on: "ON"
     payload_off: "OFF"
     retain: true
-  
+
   - platform: mqtt
     name: "Zigbee2mqtt Main join"
     state_topic: "zigbee2mqtt/bridge/config/permit_join"
@@ -261,8 +261,11 @@ switch:
   #- platform: broadlink
    # host: 192.168.1.14
    # mac: '78:0f:77:5a:dc:e2'
-   
+
 light:
+  - platform: flux_led
+    automatic_add: true
+
   - platform: mqtt
     name: "Luz Frank"
     command_topic: "cmnd/sonoff_Frank/power1"
@@ -274,7 +277,7 @@ light:
     payload_off: "OFF"
     payload_on: "ON"
     retain: false
-    
+
   - platform: mqtt
     name: "Luz Baño"
     command_topic: "cmnd/sonoff_bathroom/power"
