@@ -112,7 +112,7 @@ sensor:
        - status
        - used_pct
        - is_decrypted
-    resource: http://192.168.1.4/api/v1.0/storage/volume/SengokuNadeko/?format=json
+    resource: !secret fn_report
     value_template: '{{ value_json.status }}'
     username: !secret fn_user
     password: !secret fn_password
@@ -127,7 +127,7 @@ sensor:
 
   - platform: rest
     name: Alerta Freenas
-    resource: http://192.168.1.4/api/v1.0/system/alert/?format=json
+    resource: !secret fn_alerta
     value_template: '{{ value_json[0].level }}'
     username: !secret fn_user
     password: !secret fn_password
@@ -137,7 +137,7 @@ sensor:
 
   - platform: rest
     name: Freenas mensaje de alerta
-    resource: http://192.168.1.4/api/v1.0/system/alert/?format=json
+    resource: !secret fn_alert
     value_template: '{{ value_json[0].message }}'
     username: !secret fn_user
     password: !secret fn_password
@@ -151,7 +151,7 @@ sensor:
       - fullversion
       - name
       - version
-    resource: http://192.168.1.4/api/v1.0/system/version/?format=json
+    resource: !secret freenas_version
     value_template: '{{ value_json.fullversion }}'
     username: !secret fn_user
     password: !secret fn_password
