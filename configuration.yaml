@@ -36,9 +36,6 @@ cloud:
            - Luz de Frank
          room: Cuarto Frank
 
-
-
-
 config:
 
 webhook:
@@ -263,8 +260,8 @@ switch:
    # mac: '78:0f:77:5a:dc:e2'
 
 light:
-  - platform: flux_led
-    automatic_add: true
+  # - platform: flux_led
+  #   automatic_add: true
 
   - platform: mqtt
     name: "Luz Frank"
