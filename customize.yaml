@@ -26,3 +26,9 @@ binary_sensor.refrigerador_atras:
 light.c44f3381b70f_192_168_1_226:
   friendly_name: LUZ LED
   icon: mdi:led-strip
+sensor.speedtest_upload:
+  icon: mdi:upload-network
+sensor.speedtest_download:
+  icon: mdi:download-network
+sensor.speedtest_ping:
+  icon: mdi:heart-multiple
