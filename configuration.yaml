@@ -98,6 +98,9 @@ mqtt:
     topic: 'hass/status'
     payload: 'offline'
 
+blink:
+  username: !secret blink_username
+  password: !secret blink_password
 
 # Sensors
 sensor:
