@@ -32,3 +32,5 @@ sensor.speedtest_download:
   icon: mdi:download-network
 sensor.speedtest_ping:
   icon: mdi:heart-multiple
+light.frank:
+  icon: mdi:led-strip

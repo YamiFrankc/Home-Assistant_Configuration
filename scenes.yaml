@@ -1,0 +1,8 @@
+ - name: Frank-on
+   entities:
+     light.0x0022a3000020ce19_light: true
+     light.frank: true
+ - name: Frank-off
+   entities:
+     light.0x0022a3000020ce19_light: false
+     light.frank: false
