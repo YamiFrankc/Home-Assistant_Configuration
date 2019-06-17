@@ -85,47 +85,6 @@
   - data:
       entity_id: scene.frank_cama
     service: scene.turn_on
-- id: '1550993676832'
-  alias: Frank Cuarto
-  trigger:
-  - entity_id: input_boolean.frank_cama
-    from: 'on'
-    platform: state
-    to: 'off'
-  condition: []
-  action:
-  - data:
-      entity_id: scene.frank_despierto
-    service: scene.turn_on
-- id: '1552087068570'
-  alias: ''
-  trigger: []
-  condition: []
-  action: []
-- id: '1556352641416'
-  alias: Lampara Frank toggle
-  trigger:
-  - platform: mqtt
-    topic: zigbee2mqtt/0x00158d00020416a7
-  condition:
-  - condition: template
-    value_template: '{{ "single" == trigger.payload_json.click }}'
-  action:
-  - entity_id: switch.lampara_frank
-    service: switch.toggle
-- id: '1558238725261'
-  alias: gfd
-  trigger:
-  - platform: mqtt
-    topic: zigbee2mqtt/0x00158d00020416a7
-  condition:
-  - condition: template
-    value_template: '{{ "double" == trigger.payload_json.click }}'
-  action:
-  - data:
-      entity_id: light.luz_bano
-    entity_id: light.lampara_frank
-    service: light.turn_off
 - id: '1558509588104'
   alias: Luz pasillo  - on
   trigger:
