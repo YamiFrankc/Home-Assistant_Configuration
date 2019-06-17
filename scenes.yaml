@@ -2,7 +2,24 @@
    entities:
      light.0x0022a3000020ce19_light: true
      light.frank: true
+     switch.lampara_frank: false
  - name: Frank-off
    entities:
      light.0x0022a3000020ce19_light: false
      light.frank: false
+     switch.lampara_frank: false
+ - name: frank_cama
+   entities:
+     light.0x0022a3000020ce19_light: false
+     light.frank: false
+     switch.lampara_frank: true
+ - name: Leds-frank
+   entities:
+      light.0x0022a3000020ce19_light: false
+      light.frank: true
+      switch.lampara_frank: false
+ - name: Foco-frank
+   entities:
+      light.0x0022a3000020ce19_light: true
+      light.frank: false
+      switch.lampara_frank: true

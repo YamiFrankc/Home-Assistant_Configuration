@@ -402,6 +402,15 @@ input_select:
      - error
     initial: info
     icon: mdi:format-list-bulleted
+  luz_frank:
+    name: Luz de frank
+    options:
+      - Iluminado
+      - Apagado
+      - Led
+      - Foco
+      - Lampara
+    initial: Iluminado
 
 # Input boolean for enabling/disabling joining
 input_boolean:
@@ -413,6 +422,9 @@ input_boolean:
     name: Luz para dormir
     initial: off
     icon: mdi:bed-empty
+  frank_luz:
+    name: Luz de frank
+    initial: off
 
 # Timer for joining time remaining (120 sec = 2 min)
 timer:

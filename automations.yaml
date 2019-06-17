@@ -183,3 +183,82 @@
       message: Home Assistant  {{ states.updater.updater.state }}  is now available.
       title: HA Update
     service: notify.casa
+- id: '1560761839440'
+  alias: Frank luces - on
+  trigger:
+  - entity_id: input_boolean.frank_luz
+    from: 'off'
+    platform: state
+    to: 'on'
+  condition: []
+  action:
+  - data:
+      entity_id: scene.frank_on
+    service: scene.turn_on
+- id: '1560762087189'
+  alias: Frank luces - off
+  trigger:
+  - entity_id: input_boolean.frank_luz
+    from: 'on'
+    platform: state
+    to: 'off'
+  condition: []
+  action:
+  - data:
+      entity_id: scene.frank_off
+    service: scene.turn_on
+- id: '1560763893699'
+  alias: Luces de Frank -- Iluminado
+  trigger:
+  - entity_id: input_select.luz_frank
+    platform: state
+    to: Iluminado
+  condition: []
+  action:
+  - data:
+      entity_id: scene.frank_on
+    service: scene.turn_on
+- id: '1560764362839'
+  alias: Luces Frank - Apagado
+  trigger:
+  - entity_id: input_select.luz_frank
+    platform: state
+    to: Apagado
+  condition: []
+  action:
+  - data:
+      entity_id: scene.frank_off
+    service: scene.turn_on
+- id: '1560764409191'
+  alias: Luces de Frank - Led
+  trigger:
+  - entity_id: input_select.luz_frank
+    platform: state
+    to: Led
+  condition: []
+  action:
+  - data:
+      entity_id: scene.leds_frank
+    service: scene.turn_on
+- id: '1560764467641'
+  alias: Luces de Frank - Foco
+  trigger:
+  - entity_id: input_select.luz_frank
+    platform: state
+    to: Foco
+  condition: []
+  action:
+  - data:
+      entity_id: scene.foco_frank
+    service: scene.turn_on
+- id: '1560764539158'
+  alias: Luces de Frank - Lampara
+  trigger:
+  - entity_id: input_select.luz_frank
+    platform: state
+    to: Lampara
+  condition: []
+  action:
+  - data:
+      entity_id: scene.frank_cama
+    service: scene.turn_on
