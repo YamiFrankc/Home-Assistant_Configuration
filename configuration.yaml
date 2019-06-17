@@ -98,6 +98,8 @@ mqtt:
     topic: 'hass/status'
     payload: 'offline'
 
+scene: !include scenes.yaml
+
 blink:
   username: !secret blink_username
   password: !secret blink_password
