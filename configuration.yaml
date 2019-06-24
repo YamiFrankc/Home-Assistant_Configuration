@@ -17,7 +17,6 @@ homeassistant:
 history:
 logbook:
 
-
 # Cloud :) :) :) :) :)
 cloud:
   google_actions:
@@ -214,7 +213,7 @@ sensor:
 
 speedtestdotnet:
   scan_interval:
-    hours: 2
+    hours: 1
   monitored_conditions:
     - ping
     - download
@@ -345,8 +344,8 @@ switch:
    # mac: '78:0f:77:5a:dc:e2'
 
 light:
-  # - platform: flux_led
-  #   automatic_add: true
+  - platform: flux_led
+    automatic_add: true
 
   - platform: mqtt
     name: "Luz Frank"

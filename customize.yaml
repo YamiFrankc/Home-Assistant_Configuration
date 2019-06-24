@@ -34,3 +34,7 @@ sensor.speedtest_ping:
   icon: mdi:heart-multiple
 light.frank:
   icon: mdi:led-strip
+light.0xf0d1b80000030c8b_light:
+  icon: mdi:floor-lamp
+light.0xf0d1b80000037e7f_light:
+  icon: mdi:desk-lamp
