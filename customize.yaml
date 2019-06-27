@@ -38,3 +38,5 @@ light.0xf0d1b80000030c8b_light:
   icon: mdi:floor-lamp
 light.0xf0d1b80000037e7f_light:
   icon: mdi:desk-lamp
+sensor.mazda:
+  icon: mdi:cellphone-android

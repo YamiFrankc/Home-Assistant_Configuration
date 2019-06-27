@@ -1,3 +1,6 @@
+##
+ ### -- Cuarto de Frank
+##
  - name: Frank-on
    entities:
      light.0x0022a3000020ce19_light: true
@@ -28,3 +31,10 @@
       light.frank: false
       ##switch.lampara_frank: true
       light.0xf0d1b80000037e7f_light: false
+####
+######
+#######----------
+
+##
+ ### -- Afuera, yarda, enfrente
+##
