@@ -16,25 +16,12 @@ homeassistant:
 # Configure a default setup of Home Assistant (frontend, api, etc)
 history:
 logbook:
-map:
+
 
 # Cloud :) :) :) :) :)
 cloud:
-  google_actions:
-    filter:
-      exclude_entities:
-        - input_boolean.zigbee_permit_join
-    entity_config:
-       switch.lampara_frank:
-         name: Lampara de Frank
-         aliases:
-           - Lamparita
-         room: Cuarto Frank
-       light.luz_frank:
-         name: Luz Frank
-         aliases:
-           - Luz de Frank
-         room: Cuarto Frank
+
+
 
 config:
 
@@ -108,6 +95,7 @@ blink:
 sensor:
   - platform: aftership
     api_key: !secret aftership_apikey
+
   - platform: mqtt
     name: "My Computer - CPU Usage"
     state_topic: "iotlink/workgroup/nerv/windows-monitor/stats/cpu"
@@ -320,7 +308,7 @@ switch:
         icon_template: mdi:laptop
 
   - platform: mqtt
-    name: "Lampara Frank"
+    name: "Lamp Frank"
     state_topic: "stat/sonoff_lampara_frank/POWER"
     command_topic: "cmnd/sonoff_lampara_frank/POWER"
     payload_on: "ON"
@@ -347,8 +335,8 @@ switch:
    # mac: '78:0f:77:5a:dc:e2'
 
 light:
-  - platform: flux_led
-    automatic_add: true
+  # - platform: flux_led
+  #   automatic_add: true
 
   - platform: mqtt
     name: "Luz Frank"

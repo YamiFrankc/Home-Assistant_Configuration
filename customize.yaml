@@ -18,6 +18,7 @@ sensor.transmission_completed_torrents:
 sensor.transmission_down_speed:
   icon: mdi:speedometer
 switch.lampara_frank:
+  friendly_name: LampFrank
   icon: mdi:desk-lamp
 switch.luz_alacena:
   icon: mdi:led-strip
