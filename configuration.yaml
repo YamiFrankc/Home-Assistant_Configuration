@@ -23,6 +23,7 @@ cloud:
 
 
 
+
 config:
 
 webhook:
@@ -174,9 +175,9 @@ sensor:
     payload_not_available: "OFF"
     qos: 1
 
-  - platform: seventeentrack
-    username: yamifrankc@gmail.com
-    password: -Yf93jymI_17TRAK
+  # - platform: seventeentrack
+  #   username: yamifrankc@gmail.com
+  #   password: -Yf93jymI_17TRAK
 
   - platform: mqtt
     name: zigbee2mqtt Bridge state
