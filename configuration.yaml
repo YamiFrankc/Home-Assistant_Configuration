@@ -93,6 +93,40 @@ blink:
 
 # Sensors
 sensor:
+  - platform: darksky
+    api_key: !secret darksky_api_key
+    forecast:
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+    monitored_conditions:
+      - icon
+      - summary
+      - nearest_storm_distance
+      - nearest_storm_bearing
+      - humidity
+      - temperature
+      - temperature_high
+      - temperature_low
+      - apparent_temperature
+      - apparent_temperature_high
+      - apparent_temperature_low
+      - wind_speed
+      - wind_bearing
+      - precip_type
+      - precip_probability
+      - precip_accumulation
+      - precip_intensity
+      - precip_intensity_max
+      - uv_index
+      - daily_summary
+      - pressure
+      - visibility
+    scan_interval:
+      minutes: 5
   - platform: aftership
     api_key: !secret aftership_apikey
 
@@ -222,10 +256,10 @@ transmission:
      - download_speed
      - active_torrents
 
-weather:
-  - platform: darksky
-    api_key: !secret darksky_api_key
-    mode: daily
+  # weather:
+  #   - platform: darksky
+  #     api_key: !secret darksky_api_key
+  #     mode: daily
 
 
 binary_sensor:

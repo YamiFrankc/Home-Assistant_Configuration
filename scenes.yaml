@@ -38,3 +38,36 @@
 ##
  ### -- Afuera, yarda, enfrente
 ##
+
+ # - name: FrontLights_Mexico
+ #   entities:
+ #     # Foco de Afuera
+ #     light.0x00158d00019876df_light:
+ #       state: true
+ #       rgb_color: [255,254,254]
+ #       # luz derecha
+ #     light.0x7cb03eaa00aa0e01_light:
+ #       state: true
+ #       rgb_color: [0,255,64]
+ #  - name: FrontLights_USA
+ #    entities:
+ #      # Foco de Afuera
+ #      light.0x00158d00019876df_light:
+ #        state: true
+ #        rgb_color: [255,254,254]
+ #        # luz derecha
+ #      light.0x7cb03eaa00aa0e01_light:
+ #        state: true
+ #        rgb_color: [0,255,64]
+ # - name: FrontLights_off
+ #   entities:
+ #     # Foco de Afuera
+ #     light.0x00158d00019876df_light: false
+ #       # luz derecha
+ #     light.0x7cb03eaa00aa0e01_light: false
+ # - name: FrontLights_On
+ #   entities:
+ #     # Foco de Afuera
+ #     light.0x00158d00019876df_light: true
+ #       # luz derecha
+ #     light.0x7cb03eaa00aa0e01_light: true
