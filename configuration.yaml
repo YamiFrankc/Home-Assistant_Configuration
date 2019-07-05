@@ -21,7 +21,11 @@ logbook:
 # Cloud :) :) :) :) :)
 cloud:
 
-
+hacs:
+  token: !secret hacs_token
+  appdaemon: true
+  python_script: true
+  theme: true
 
 
 config:
@@ -264,6 +268,16 @@ transmission:
 
 
 binary_sensor:
+  - platform: tod
+    name: Early Morning
+    after: sunrise
+    before: '08:00'
+
+  - platform: tod
+    name: Night
+    after: sunset
+    before: sunrise
+
   - platform: mqtt
     name: "My Computer - Connected"
     state_topic: "iotlink/workgroup/nerv/lwt"
