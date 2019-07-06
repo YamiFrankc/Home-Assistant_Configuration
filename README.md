@@ -13,6 +13,9 @@ But I'm planning to move everything to Node-Red.
 |Mini Graph Card| I like how it looks|
 | Mini media Player | Looks so much cooler than the default one|
 
+
+## Screenshots
+
 ## Rough list and description of devices [ TODO: Do this right]
 
 I have 3 Sonoff Basics flashed with Tasmota around the house. One of them is spliced  after the light switch for the bathroom. The other two are spliced in power strips to control a desk lamp and led strips in the pantry.
