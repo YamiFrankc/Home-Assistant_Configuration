@@ -1,3 +1,11 @@
+########
+##
+##  YamiFrankc's Home Assistant configuration.
+## Everything here is open source and you can grab anything you want and use as you like
+## You can contact me at Yami at yamifrankc.com
+##############
+
+
 homeassistant:
   # Name of the location where Home Assistant is running
   name: Casa
@@ -97,149 +105,8 @@ blink:
   password: !secret blink_password
 
 # Sensors
-sensor:
-  - platform: darksky
-    api_key: !secret darksky_api_key
-    forecast:
-      - 0
-      - 1
-      - 2
-      - 3
-      - 4
-      - 5
-    monitored_conditions:
-      - icon
-      - summary
-      - nearest_storm_distance
-      - nearest_storm_bearing
-      - humidity
-      - temperature
-      - temperature_high
-      - temperature_low
-      - apparent_temperature
-      - apparent_temperature_high
-      - apparent_temperature_low
-      - wind_speed
-      - wind_bearing
-      - precip_type
-      - precip_probability
-      - precip_accumulation
-      - precip_intensity
-      - precip_intensity_max
-      - uv_index
-      - daily_summary
-      - pressure
-      - visibility
-    scan_interval:
-      minutes: 5
-  - platform: aftership
-    api_key: !secret aftership_apikey
+sensor: !include sensors.yaml
 
-  - platform: mqtt
-    name: "My Computer - CPU Usage"
-    state_topic: "iotlink/workgroup/nerv/windows-monitor/stats/cpu"
-    unit_of_measurement: '%'
-    icon: mdi:speedometer
-    value_template: "{{ value }}"
-    availability_topic: "iotlink/workgroup/nerv/lwt"
-    payload_available: "ON"
-    payload_not_available: "OFF"
-    qos: 1
-
-  - platform: mqtt
-    name: "My Computer - RAM Usage"
-    state_topic: "iotlink/workgroup/nerv/windows-monitor/stats/memory/usage"
-    unit_of_measurement: '%'
-    icon: mdi:memory
-    value_template: "{{ value }}"
-    availability_topic: "iotlink/workgroup/nerv/lwt"
-    payload_available: "ON"
-    payload_not_available: "OFF"
-    qos: 1
-
-  - platform: mqtt
-    name: "My Computer - Remaining Battery"
-    state_topic: "iotlink/workgroup/nerv/windows-monitor/stats/battery/remaining-percent"
-    unit_of_measurement: '%'
-    device_class: battery
-    value_template: "{{ value }}"
-    availability_topic: "iotlink/workgroup/nerv/lwt"
-    payload_available: "ON"
-    payload_not_available: "OFF"
-    qos: 1
-
-  - platform: mqtt
-    name: "My Computer - Remaining Battery Time"
-    state_topic: "iotlink/workgroup/nerv/windows-monitor/stats/battery/remaining-time"
-    unit_of_measurement: 'minutes'
-    icon: mdi:timer
-    value_template: "{{ ( value | float / 60 ) | int }}"
-    availability_topic: "iotlink/workgroup/nerv/lwt"
-    payload_available: "ON"
-    payload_not_available: "OFF"
-    qos: 1
-
-  # - platform: seventeentrack
-  #   username: yamifrankc@gmail.com
-  #   password: -Yf93jymI_17TRAK
-
-  - platform: mqtt
-    name: zigbee2mqtt Bridge state
-    state_topic: "avispa/bridge/state"
-    icon: mdi:router-wireless
-  - platform: rest
-    name: Reporte
-    json_attributes:
-       - name
-       - status
-       - used_pct
-       - is_decrypted
-    resource: !secret fn_report
-    value_template: '{{ value_json.status }}'
-    username: !secret fn_user
-    password: !secret fn_password
-    authentication: basic
-    headers:
-      Content-Type: application/json
-  - platform: template
-    sensors:
-      fn_trunk_pct_used:
-        value_template: '{{ states.sensor.reporte.attributes["used_pct"].title() }}'
-        entity_id: sensor.fn_trunk_report
-
-  - platform: rest
-    name: Alerta Freenas
-    resource: !secret fn_alerta
-    value_template: '{{ value_json[0].level }}'
-    username: !secret fn_user
-    password: !secret fn_password
-    authentication: basic
-    headers:
-      Content-Type: application/json
-
-  - platform: rest
-    name: Freenas mensaje de alerta
-    resource: !secret fn_alert
-    value_template: '{{ value_json[0].message }}'
-    username: !secret fn_user
-    password: !secret fn_password
-    authentication: basic
-    headers:
-      Content-Type: application/json
-
-  - platform: rest
-    name: Freenas version
-    json_attributes:
-      - fullversion
-      - name
-      - version
-    resource: !secret freenas_version
-    value_template: '{{ value_json.fullversion }}'
-    username: !secret fn_user
-    password: !secret fn_password
-    authentication: basic
-    headers:
-      Content-Type: application/json
 
 speedtestdotnet:
   scan_interval:
@@ -267,88 +134,9 @@ transmission:
   #     mode: daily
 
 
-binary_sensor:
-
-  - platform: ping
-    name: Hanekawa
-    host: 192.168.1.4
-
-  - platform: ping
-    name: Caddy
-    host: 192.168.1.11
+binary_sensor: !include binary_sensors.yaml
 
 
-  - platform: ping
-    name: Nozomi
-    host: 192.168.1.12
-    count: 2
-
-  - platform: tod
-    name: Early Morning
-    after: sunrise
-    before: '08:00'
-
-  - platform: tod
-    name: Night
-    after: sunset
-    before: sunrise
-
-  - platform: mqtt
-    name: "My Computer - Connected"
-    state_topic: "iotlink/workgroup/nerv/lwt"
-    value_template: "{{ value }}"
-    payload_on: "ON"
-    payload_off: "OFF"
-    device_class: "connectivity"
-    qos: 1
-
-  - platform: mqtt
-    name: "My Computer - Charging"
-    state_topic: "iotlink/workgroup/nerv/windows-monitor/stats/power/status"
-    value_template: "{{ value }}"
-    payload_on: "Online"
-    payload_off: "Offline"
-    device_class: "plug"
-    availability_topic: "iotlink/workgroup/nerv/lwt"
-    payload_available: "ON"
-    payload_not_available: "OFF"
-    qos: 1
-
-  - platform: mqtt
-    state_topic: "tele/sonoff_rf_frank/RESULT"
-    name: 'Movimiento Baño'
-    value_template: '{{value_json.RfReceived.Data}}'
-    payload_on: 'E42CFE'
-    payload_off: 'E42CF-E'
-    device_class: motion
-    qos: 1
-
-  - platform: mqtt
-    state_topic: "tele/sonoff_rf_frank/RESULT"
-    name: 'Puerta Frank'
-    value_template: '{{value_json.RfReceived.Data}}'
-    payload_on: '8115EE'
-    payload_off: '8115E7'
-    device_class: door
-    qos: 1
-
-  - platform: mqtt
-    state_topic: "tele/sonoff_rf_sala/RESULT"
-    name: 'Refrigerador atras'
-    value_template: '{{value_json.RfReceived.Data}}'
-    payload_on: '18230A'
-    payload_off: '18230E'
-    device_class: door
-    qos: 1
-
-  - platform: mqtt
-    state_topic: "tele/sonoff_rf_sala/RESULT"
-    name: 'Alacena'
-    value_template: '{{value_json.RfReceived.Data}}'
-    payload_on: '4CF5EE'
-    payload_off: '4CF5E7'
-    device_class: door
-    qos: 1
 
 tts:
   - platform: google_translate
@@ -359,72 +147,10 @@ tts:
     time_memory: 300
     base_url: !secret base_url
 
-switch:
-  - platform: template
-    switches:
-      my_computer:
-        friendly_name: "My Computer"
-        value_template: "{{ is_state('binary_sensor.my_computer_connected', 'on') }}"
-        turn_on:
-          service: script.my_computer_wake
-        turn_off:
-          service: script.my_computer_suspend
-        icon_template: mdi:laptop
+switch: !include  switches.yaml
 
-  - platform: mqtt
-    name: "Lamp Frank"
-    state_topic: "stat/sonoff_lampara_frank/POWER"
-    command_topic: "cmnd/sonoff_lampara_frank/POWER"
-    payload_on: "ON"
-    payload_off: "OFF"
-    retain: true
 
-  - platform: mqtt
-    name: "Luz alacena"
-    state_topic: "stat/sonoff_alacena/POWER"
-    command_topic: "cmnd/sonoff_alacena/POWER"
-    payload_on: "ON"
-    payload_off: "OFF"
-    retain: true
-
-  - platform: mqtt
-    name: "zigbee2mqtt Main join"
-    state_topic: "avispa/bridge/config/permit_join"
-    command_topic: "avispa/bridge/config/permit_join"
-    payload_on: "true"
-    payload_off: "false"
-
-  #- platform: broadlink
-   # host: 192.168.1.14
-   # mac: '78:0f:77:5a:dc:e2'
-
-light:
-  # - platform: flux_led
-  #   automatic_add: true
-
-  - platform: mqtt
-    name: "Luz Frank"
-    command_topic: "cmnd/sonoff_Frank/power1"
-    state_topic: "stat/sonoff_Frank/POWER1"
-    availability_topic: tele/sonoff_Frank/LWT
-    payload_available: Online
-    payload_not_available: Offline
-    qos: 1
-    payload_off: "OFF"
-    payload_on: "ON"
-    retain: false
-
-  - platform: mqtt
-    name: "Luz Baño"
-    command_topic: "cmnd/sonoff_bathroom/power"
-    state_topic: "stat/sonoff_bathroom/POWER"
-    availability_topic: tele/sonoff_bathroom/LWT
-    payload_available: Online
-    payload_not_available: Offline
-    payload_off: "OFF"
-    payload_on: "ON"
-    retain: false
-
+light: !include lights.yaml
 
 automation: !include automations.yaml
 script: !include scripts.yaml

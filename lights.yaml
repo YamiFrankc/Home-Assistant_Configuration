@@ -1,0 +1,25 @@
+  # - platform: flux_led
+  #   automatic_add: true
+
+  - platform: mqtt
+    name: "Luz Frank"
+    command_topic: "cmnd/sonoff_Frank/power1"
+    state_topic: "stat/sonoff_Frank/POWER1"
+    availability_topic: tele/sonoff_Frank/LWT
+    payload_available: Online
+    payload_not_available: Offline
+    qos: 1
+    payload_off: "OFF"
+    payload_on: "ON"
+    retain: false
+
+  - platform: mqtt
+    name: "Luz Baño"
+    command_topic: "cmnd/sonoff_bathroom/power"
+    state_topic: "stat/sonoff_bathroom/POWER"
+    availability_topic: tele/sonoff_bathroom/LWT
+    payload_available: Online
+    payload_not_available: Offline
+    payload_off: "OFF"
+    payload_on: "ON"
+    retain: false

@@ -1,0 +1,142 @@
+  - platform: darksky
+    api_key: !secret darksky_api_key
+    forecast:
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+    monitored_conditions:
+      - icon
+      - summary
+      - nearest_storm_distance
+      - nearest_storm_bearing
+      - humidity
+      - temperature
+      - temperature_high
+      - temperature_low
+      - apparent_temperature
+      - apparent_temperature_high
+      - apparent_temperature_low
+      - wind_speed
+      - wind_bearing
+      - precip_type
+      - precip_probability
+      - precip_accumulation
+      - precip_intensity
+      - precip_intensity_max
+      - uv_index
+      - daily_summary
+      - pressure
+      - visibility
+    scan_interval:
+      minutes: 5
+  - platform: aftership
+    api_key: !secret aftership_apikey
+
+  - platform: mqtt
+    name: "My Computer - CPU Usage"
+    state_topic: "iotlink/workgroup/nerv/windows-monitor/stats/cpu"
+    unit_of_measurement: '%'
+    icon: mdi:speedometer
+    value_template: "{{ value }}"
+    availability_topic: "iotlink/workgroup/nerv/lwt"
+    payload_available: "ON"
+    payload_not_available: "OFF"
+    qos: 1
+
+  - platform: mqtt
+    name: "My Computer - RAM Usage"
+    state_topic: "iotlink/workgroup/nerv/windows-monitor/stats/memory/usage"
+    unit_of_measurement: '%'
+    icon: mdi:memory
+    value_template: "{{ value }}"
+    availability_topic: "iotlink/workgroup/nerv/lwt"
+    payload_available: "ON"
+    payload_not_available: "OFF"
+    qos: 1
+
+  - platform: mqtt
+    name: "My Computer - Remaining Battery"
+    state_topic: "iotlink/workgroup/nerv/windows-monitor/stats/battery/remaining-percent"
+    unit_of_measurement: '%'
+    device_class: battery
+    value_template: "{{ value }}"
+    availability_topic: "iotlink/workgroup/nerv/lwt"
+    payload_available: "ON"
+    payload_not_available: "OFF"
+    qos: 1
+
+  - platform: mqtt
+    name: "My Computer - Remaining Battery Time"
+    state_topic: "iotlink/workgroup/nerv/windows-monitor/stats/battery/remaining-time"
+    unit_of_measurement: 'minutes'
+    icon: mdi:timer
+    value_template: "{{ ( value | float / 60 ) | int }}"
+    availability_topic: "iotlink/workgroup/nerv/lwt"
+    payload_available: "ON"
+    payload_not_available: "OFF"
+    qos: 1
+
+  # - platform: seventeentrack
+  #   username: yamifrankc@gmail.com
+  #   password: -Yf93jymI_17TRAK
+
+  - platform: mqtt
+    name: zigbee2mqtt Bridge state
+    state_topic: "avispa/bridge/state"
+    icon: mdi:router-wireless
+  - platform: rest
+    name: Reporte
+    json_attributes:
+       - name
+       - status
+       - used_pct
+       - is_decrypted
+    resource: !secret fn_report
+    value_template: '{{ value_json.status }}'
+    username: !secret fn_user
+    password: !secret fn_password
+    authentication: basic
+    headers:
+      Content-Type: application/json
+  - platform: template
+    sensors:
+      fn_trunk_pct_used:
+        value_template: '{{ states.sensor.reporte.attributes["used_pct"].title() }}'
+        entity_id: sensor.fn_trunk_report
+
+  - platform: rest
+    name: Alerta Freenas
+    resource: !secret fn_alerta
+    value_template: '{{ value_json[0].level }}'
+    username: !secret fn_user
+    password: !secret fn_password
+    authentication: basic
+    headers:
+      Content-Type: application/json
+
+  - platform: rest
+    name: Freenas mensaje de alerta
+    resource: !secret fn_alert
+    value_template: '{{ value_json[0].message }}'
+    username: !secret fn_user
+    password: !secret fn_password
+    authentication: basic
+    headers:
+      Content-Type: application/json
+
+  - platform: rest
+    name: Freenas version
+    json_attributes:
+      - fullversion
+      - name
+      - version
+    resource: !secret freenas_version
+    value_template: '{{ value_json.fullversion }}'
+    username: !secret fn_user
+    password: !secret fn_password
+    authentication: basic
+    headers:
+      Content-Type: application/json

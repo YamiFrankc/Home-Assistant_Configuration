@@ -1,0 +1,80 @@
+  - platform: ping
+    name: Hanekawa
+    host: 192.168.1.4
+
+  - platform: ping
+    name: Caddy
+    host: 192.168.1.11
+
+
+  - platform: ping
+    name: Nozomi
+    host: 192.168.1.12
+    count: 2
+
+  - platform: tod
+    name: Early Morning
+    after: sunrise
+    before: '08:00'
+
+  - platform: tod
+    name: Night
+    after: sunset
+    before: sunrise
+
+  - platform: mqtt
+    name: "My Computer - Connected"
+    state_topic: "iotlink/workgroup/nerv/lwt"
+    value_template: "{{ value }}"
+    payload_on: "ON"
+    payload_off: "OFF"
+    device_class: "connectivity"
+    qos: 1
+
+  - platform: mqtt
+    name: "My Computer - Charging"
+    state_topic: "iotlink/workgroup/nerv/windows-monitor/stats/power/status"
+    value_template: "{{ value }}"
+    payload_on: "Online"
+    payload_off: "Offline"
+    device_class: "plug"
+    availability_topic: "iotlink/workgroup/nerv/lwt"
+    payload_available: "ON"
+    payload_not_available: "OFF"
+    qos: 1
+
+  - platform: mqtt
+    state_topic: "tele/sonoff_rf_frank/RESULT"
+    name: 'Movimiento Baño'
+    value_template: '{{value_json.RfReceived.Data}}'
+    payload_on: 'E42CFE'
+    payload_off: 'E42CF-E'
+    device_class: motion
+    qos: 1
+
+  - platform: mqtt
+    state_topic: "tele/sonoff_rf_frank/RESULT"
+    name: 'Puerta Frank'
+    value_template: '{{value_json.RfReceived.Data}}'
+    payload_on: '8115EE'
+    payload_off: '8115E7'
+    device_class: door
+    qos: 1
+
+  - platform: mqtt
+    state_topic: "tele/sonoff_rf_sala/RESULT"
+    name: 'Refrigerador atras'
+    value_template: '{{value_json.RfReceived.Data}}'
+    payload_on: '18230A'
+    payload_off: '18230E'
+    device_class: door
+    qos: 1
+
+  - platform: mqtt
+    state_topic: "tele/sonoff_rf_sala/RESULT"
+    name: 'Alacena'
+    value_template: '{{value_json.RfReceived.Data}}'
+    payload_on: '4CF5EE'
+    payload_off: '4CF5E7'
+    device_class: door
+    qos: 1

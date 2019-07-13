@@ -41,3 +41,7 @@ light.0xf0d1b80000037e7f_light:
   icon: mdi:desk-lamp
 sensor.mazda:
   icon: mdi:cellphone-android
+light.0x00158d00019876df_light:
+  icon: mdi:ceiling-light
+sensor.0x00158d00020416a7_click_2:
+  icon: mdi:gamepad-round
