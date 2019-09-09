@@ -35,16 +35,14 @@
   - platform: aftership
     api_key: !secret aftership_apikey
 
-  - platform: mqtt
-    name: "My Computer - CPU Usage"
-    state_topic: "iotlink/workgroup/nerv/windows-monitor/stats/cpu"
-    unit_of_measurement: '%'
-    icon: mdi:speedometer
-    value_template: "{{ value }}"
-    availability_topic: "iotlink/workgroup/nerv/lwt"
-    payload_available: "ON"
-    payload_not_available: "OFF"
-    qos: 1
+  # - platform: mqtt
+  #   name: Zigbee2mqtt Networkmap
+  #   # if you change base_topic of Zigbee2mqtt, change state_topic accordingly
+  #   state_topic: avispa/bridge/networkmap/raw
+  #   value_template: >-
+  #     {{ now().strftime('%Y-%m-%d %H:%M:%S') }}
+  #   # again, if you change base_topic of Zigbee2mqtt, change json_attributes_topic accordingly
+  #   json_attributes_topic: avispa/bridge/networkmap/raw
 
   - platform: mqtt
     name: "My Computer - RAM Usage"
@@ -58,22 +56,23 @@
     qos: 1
 
   - platform: mqtt
-    name: "My Computer - Remaining Battery"
-    state_topic: "iotlink/workgroup/nerv/windows-monitor/stats/battery/remaining-percent"
-    unit_of_measurement: '%'
-    device_class: battery
+    name: "My Computer - Up Time"
+    state_topic: "iotlink/workgroup/nerv/stats/system/uptime"
+    unit_of_measurement: 'seconds'
+    icon: mdi:timer
     value_template: "{{ value }}"
     availability_topic: "iotlink/workgroup/nerv/lwt"
     payload_available: "ON"
     payload_not_available: "OFF"
     qos: 1
 
+
   - platform: mqtt
-    name: "My Computer - Remaining Battery Time"
-    state_topic: "iotlink/workgroup/nerv/windows-monitor/stats/battery/remaining-time"
-    unit_of_measurement: 'minutes'
-    icon: mdi:timer
-    value_template: "{{ ( value | float / 60 ) | int }}"
+    name: "My Computer - CPU Usage"
+    state_topic: "iotlink/workgroup/nerv/windows-monitor/stats/cpu"
+    unit_of_measurement: '%'
+    icon: mdi:speedometer
+    value_template: "{{ value }}"
     availability_topic: "iotlink/workgroup/nerv/lwt"
     payload_available: "ON"
     payload_not_available: "OFF"

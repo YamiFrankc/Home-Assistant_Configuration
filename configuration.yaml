@@ -22,6 +22,13 @@ homeassistant:
   customize: !include customize.yaml
 
 # Configure a default setup of Home Assistant (frontend, api, etc)
+
+
+recorder:
+  purge_interval: 2
+  purge_keep_days: 5
+
+
 history:
 logbook:
 
@@ -44,9 +51,9 @@ zigbee2mqtt_networkmap:
 
 panel_iframe:
    networkmap:
-     title: 'Zigbee Map'
-     url: '/local/zigbee2mqtt_networkmap/map.html'
-     icon: 'mdi:graphql'
+    title: 'Zigbee Map'
+    url: '/local/zigbee2mqtt_networkmap/map.html'
+    icon: 'mdi:graphql'
    cloud9:
       title: 'Cloud9'
       url: 'http://192.168.1.20:8321/ide.html'
