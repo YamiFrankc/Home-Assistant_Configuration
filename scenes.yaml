@@ -5,12 +5,14 @@
    entities:
      light.0x0022a3000020ce19_light: true
      light.frank: true
+     light.focote_1: true
      #switch.lampara_frank: false
      light.0xf0d1b80000037e7f_light: false
  - name: Frank-off
    entities:
      light.0x0022a3000020ce19_light: false
      light.frank: false
+     light.focote_1: false
      #switch.lampara_frank: false
      light.0xf0d1b80000037e7f_light: false
  - name: frank_cama
@@ -18,18 +20,21 @@
      light.0x0022a3000020ce19_light: false
      light.frank: false
      ##switch.lampara_frank: true
+     light.focote_1: false
      light.0xf0d1b80000037e7f_light: true
  - name: Leds-frank
    entities:
       light.0x0022a3000020ce19_light: false
       light.frank: true
       ##switch.lampara_frank: false
+      light.focote_1: false
       light.0xf0d1b80000037e7f_light: false
  - name: Foco-frank
    entities:
       light.0x0022a3000020ce19_light: true
       light.frank: false
       ##switch.lampara_frank: true
+      light.focote_1: false
       light.0xf0d1b80000037e7f_light: false
 ####
 ######

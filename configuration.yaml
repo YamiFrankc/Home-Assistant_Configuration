@@ -33,6 +33,21 @@ history:
 logbook:
 
 
+influxdb:
+  host: a0d7b954-influxdb
+  port: 8086
+  database: homeassistant
+  username: homeassistant
+  password: homeassistant
+  max_retries: 3
+  default_measurement: state
+
+
+# entity_controller:
+#   motion_light:
+#     sensor: binary_sensor.0x00158d0002e999d4_occupancy_2
+#     entity: light.0xf0d1b80000037e7f_light
+
 # Cloud :) :) :) :) :)
 cloud:
 
@@ -48,6 +63,8 @@ config:
 webhook:
 
 zigbee2mqtt_networkmap:
+
+
 
 panel_iframe:
    networkmap:
@@ -124,16 +141,16 @@ speedtestdotnet:
     - upload
 
 
-transmission:
-  host: !secret transmission_host
-  name: Transmission
-  scan_interval: 180
-  monitored_conditions:
-     - total_torrents
-     - completed_torrents
-     - started_torrents
-     - download_speed
-     - active_torrents
+# transmission:
+#   host: !secret transmission_host
+#   name: Transmission
+#   scan_interval: 180
+#   monitored_conditions:
+#      - total_torrents
+#      - completed_torrents
+#      - started_torrents
+#      - download_speed
+#      - active_torrents
 
   # weather:
   #   - platform: darksky
