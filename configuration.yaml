@@ -20,17 +20,26 @@ homeassistant:
   time_zone: America/Chicago
   # Customization file
   customize: !include customize.yaml
+  #uth_providers:
+   #- type: legacy_api_password
+    # api_password:  !secret http_api_password
+  
+# Example configuration.yaml entry
+mobile_app:
 
 # Configure a default setup of Home Assistant (frontend, api, etc)
 
+wake_on_lan:
 
 recorder:
   purge_interval: 2
   purge_keep_days: 5
 
+map:
 
 history:
 logbook:
+
 
 
 influxdb:
@@ -71,16 +80,16 @@ panel_iframe:
     title: 'Zigbee Map'
     url: '/local/zigbee2mqtt_networkmap/map.html'
     icon: 'mdi:graphql'
-   cloud9:
-      title: 'Cloud9'
-      url: 'http://192.168.1.20:8321/ide.html'
-      icon: 'mdi:code-braces'
+   grafana:
+    title: Grafana
+    icon: mdi:chart-timeline
+    url: http://192.168.1.20:3000
 
 
 stream:
 
-http:
-  api_password: !secret http_api_password
+# http:
+ # api_password: !secret http_api_password
 
 
 system_health:
@@ -95,13 +104,10 @@ notify:
 
 # Enables the frontend
 frontend:
-   themes: !include themes.yaml
+   themes: !include_dir_merge_named themes
 
 camera:
-   - platform: mjpeg
-     name: WyZEE
-     mjpeg_url: http://192.168.1.20:8081
-     still_image_url: http://192.168.1.20:8123/api/hassio_ingress/pFUgNVaxhwTr2phZNZCp0BS1cZi1yKxr5Iy6fIkdyNw/picture/1/current/
+
 
 
 
@@ -124,14 +130,14 @@ mqtt:
 
 scene: !include scenes.yaml
 
-blink:
-  username: !secret blink_username
-  password: !secret blink_password
+# blink:
+#   username: !secret blink_username
+#   password: !secret blink_password
 
 # Sensors
 sensor: !include sensors.yaml
 
-
+zone: !include zones.yaml
 speedtestdotnet:
   scan_interval:
     hours: 1
@@ -152,10 +158,10 @@ speedtestdotnet:
 #      - download_speed
 #      - active_torrents
 
-  # weather:
-  #   - platform: darksky
-  #     api_key: !secret darksky_api_key
-  #     mode: daily
+weather:
+   - platform: darksky
+     api_key: !secret darksky_api_key
+     mode: daily
 
 
 binary_sensor: !include binary_sensors.yaml
@@ -195,6 +201,21 @@ group:
       - input_select.zigbee2mqtt_log_level
       - automation.zigbee2mqtt_log_level
 
+  familia:
+     name: Familia
+     entities:
+      - device_tracker.life360_ma
+      - device_tracker.life360_pa
+      - device_tracker.life360_frank
+
+  luz_frank:
+    name: Luz Frank
+    entities:
+      - light.focote_1
+      - light.frank
+      - light.0xf0d1b80000037e7f_light
+
+      
 # Input select for zigbee2mqtt debug level
 input_select:
   zigbee2mqtt_log_level:

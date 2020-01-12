@@ -22,8 +22,12 @@
     after: sunset
     before: sunrise
 
+##############
+### IOT Link STart
+##############
+
   - platform: mqtt
-    name: "My Computer - Connected"
+    name: "Nerv Windows"
     state_topic: "iotlink/workgroup/nerv/lwt"
     value_template: "{{ value }}"
     payload_on: "ON"
@@ -31,26 +35,19 @@
     device_class: "connectivity"
     qos: 1
 
-  - platform: mqtt
-    name: "My Computer - Charging"
-    state_topic: "iotlink/workgroup/nerv/windows-monitor/stats/power/status"
-    value_template: "{{ value }}"
-    payload_on: "Online"
-    payload_off: "Offline"
-    device_class: "plug"
-    availability_topic: "iotlink/workgroup/nerv/lwt"
-    payload_available: "ON"
-    payload_not_available: "OFF"
-    qos: 1
 
-  - platform: mqtt
-    state_topic: "tele/sonoff_rf_frank/RESULT"
-    name: 'Movimiento Baño'
-    value_template: '{{value_json.RfReceived.Data}}'
-    payload_on: 'E42CFE'
-    payload_off: 'E42CF-E'
-    device_class: motion
-    qos: 1
+####################################
+## IOT Link END
+#########################
+
+  # - platform: mqtt
+  #   state_topic: "tele/sonoff_rf_frank/RESULT"
+  #   name: 'Movimiento Baño'
+  #   value_template: '{{value_json.RfReceived.Data}}'
+  #   payload_on: 'E42CFE'
+  #   payload_off: 'E42CF-E'
+  #   device_class: motion
+  #   qos: 1
 
   - platform: mqtt
     state_topic: "tele/sonoff_rf_frank/RESULT"
@@ -78,3 +75,26 @@
     payload_off: '4CF5E7'
     device_class: door
     qos: 1
+
+####### Phones charging? from life360
+
+  - platform: template
+    sensors:
+      charging_android_yami:
+        value_template: "{{ state_attr('device_tracker.life360_frank', 'battery_charging') }}"
+        friendly_name: 'Bateria Android Yami'
+        icon_template: mdi:battery-charging
+
+  - platform: template
+    sensors:
+      charging_ma:
+        value_template: "{{ state_attr('device_tracker.life360_ma', 'battery_charging') }}"
+        friendly_name: 'Bateria Ma'
+        icon_template: mdi:battery-charging
+
+  - platform: template
+    sensors:
+      charging_pa:
+        value_template: "{{ state_attr('device_tracker.life360_pa', 'battery_charging') }}"
+        friendly_name: 'Bateria Pa'
+        icon_template: mdi:battery-charging

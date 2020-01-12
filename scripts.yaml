@@ -1,0 +1,39 @@
+nerv_shutdown:
+  alias: "Nerv - Shutdown"
+  sequence:
+    - service: mqtt.publish
+      data:
+        topic: "iotlink/workgroup/nerv/commands/shutdown"
+        payload: ""
+
+nerv_lock:
+  alias: "Nerv - Lock"
+  sequence:
+    - service: mqtt.publish
+      data:
+        topic: "iotlink/workgroup/nerv/commands/lock"
+        payload: ""
+
+nerv_hibernate:
+  alias: "Nerv - Hibernate"
+  sequence:
+    - service: mqtt.publish
+      data:
+        topic: "iotlink/workgroup/nerv/commands/hibernate"
+        payload: ""
+
+nerv_reboot:
+  alias: "Nerv - Reboot"
+  sequence:
+    - service: mqtt.publish
+      data:
+        topic: "iotlink/workgroup/nerv/commands/reboot"
+        payload: ""
+
+nerv_wake:
+    # To enable see https://www.home-assistant.io/components/wake_on_lan/
+    alias: "Nerv - Wake"
+    sequence:
+      - service: wake_on_lan.send_magic_packet
+        data:
+          mac: "60:45:cb:9e:ec:aa"

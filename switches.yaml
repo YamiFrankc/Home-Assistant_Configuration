@@ -1,20 +1,11 @@
-  - platform: template
-    switches:
-      my_computer:
-        friendly_name: "My Computer"
-        value_template: "{{ is_state('binary_sensor.my_computer_connected', 'on') }}"
-        turn_on:
-          service: script.my_computer_wake
-        turn_off:
-          service: script.my_computer_suspend
-        icon_template: mdi:laptop
 
   - platform: mqtt
-    name: "Lamp Frank"
+    name: "Luces navidad"
     state_topic: "stat/sonoff_lampara_frank/POWER"
     command_topic: "cmnd/sonoff_lampara_frank/POWER"
     payload_on: "ON"
     payload_off: "OFF"
+    icon: mdi:string-lights
     retain: true
 
   - platform: mqtt
@@ -35,3 +26,12 @@
   #- platform: broadlink
    # host: 192.168.1.14
    # mac: '78:0f:77:5a:dc:e2'
+
+#############
+## IOT Link STart
+
+
+
+####
+## IOT LINK END
+########
