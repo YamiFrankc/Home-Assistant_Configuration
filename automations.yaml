@@ -221,3 +221,66 @@
   - data:
       entity_id: scene.frank_cama
     service: scene.turn_on
+- id: '1582445144702'
+  alias: Luz lavanderia ON on arrival (Frank)
+  description: Lavanderia lights turn on when Frank comes after dark
+  trigger:
+  - entity_id: device_tracker.life360_frank
+    platform: state
+    to: Home
+  condition:
+  - after: sunset
+    condition: sun
+  action:
+  - entity_id: group.luz_lavado
+    service: homeassistant.turn_on
+- id: '1582445437430'
+  alias: Turn on lavanderia with motion
+  description: Turn on lavanderia lights with motion
+  trigger:
+  - entity_id: binary_sensor.0x00158d0002e999d4_occupancy_2
+    platform: state
+    to: 'on'
+  condition: []
+  action:
+  - entity_id: group.luz_lavado
+    service: homeassistant.turn_on
+- id: '1582445667146'
+  alias: Turn OFF lavanderia  if no motion
+  description: Turn OFF ligths in lavanderia if no motion detected for 5 minutes
+  trigger:
+  - entity_id: group.luz_lavado
+    for: 00:05:00
+    platform: state
+    to: 'on'
+  condition:
+  - condition: state
+    entity_id: binary_sensor.0x00158d0002e999d4_occupancy_2
+    state: 'off'
+  action:
+  - entity_id: group.luz_lavado
+    service: homeassistant.turn_off
+- id: '1582447595924'
+  alias: Turn ON front door light with motion after dark
+  description: ''
+  trigger:
+  - entity_id: binary_sensor.blink_puerta_enfrente_motion_detected
+    platform: state
+    to: 'on'
+  condition: []
+  action:
+  - entity_id: light.0x00158d00019876df_light
+    service: light.turn_on
+- id: '1583310590897'
+  alias: Turn off luz puerta when no motion
+  description: ''
+  trigger:
+  - entity_id: binary_sensor.blink_puerta_enfrente_motion_detected
+    platform: state
+    to: 'off'
+  condition: []
+  action:
+  - device_id: 8880441f33744f8188bce1d76461c6a4
+    domain: light
+    entity_id: light.0x00158d00019876df_light
+    type: turn_off

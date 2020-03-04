@@ -9,10 +9,10 @@
 homeassistant:
   # Name of the location where Home Assistant is running
   name: Casa
-  # Location required to calculate the time the sun rises and sets
+  # Location required to calculate the time the sun rises and sets []
   latitude: !secret latitude
   longitude: !secret longitude
-  # Impacts weather/sunrise data (altitude above sea level in meters)
+  # Impacts weather/sunrise data (altitude above sea level in )
   elevation: !secret elevation
   # metric for Metric, imperial for Imperial
   unit_system: metric
@@ -39,6 +39,7 @@ map:
 
 history:
 logbook:
+
 
 
 
@@ -130,9 +131,7 @@ mqtt:
 
 scene: !include scenes.yaml
 
-# blink:
-#   username: !secret blink_username
-#   password: !secret blink_password
+
 
 # Sensors
 sensor: !include sensors.yaml
@@ -215,6 +214,12 @@ group:
       - light.frank
       - light.0xf0d1b80000037e7f_light
 
+  luz_lavado:
+    name: Luz lavanderia
+    entities:
+      - light.0xccccccfffed7925f_light
+      - light.0xccccccfffed89edd_light
+
       
 # Input select for zigbee2mqtt debug level
 input_select:
@@ -236,6 +241,10 @@ input_select:
       - Foco
       - Lampara
     initial: Iluminado
+
+blink:
+  username: !secret blink_username
+  password: !secret blink_password
 
 # Input boolean for enabling/disabling joining
 input_boolean:

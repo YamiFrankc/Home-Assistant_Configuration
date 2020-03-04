@@ -47,3 +47,5 @@ sensor.0x00158d00020416a7_click_2:
   icon: mdi:gamepad-round
 switch.luces_navidad:
   icon: mdi:lighthouse
+sensor.transmission_active_torrents:
+  icon: fas:church
