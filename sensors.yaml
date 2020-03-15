@@ -32,8 +32,16 @@
       - visibility
     scan_interval:
       minutes: 5
-  - platform: aftership
-    api_key: !secret aftership_apikey
+
+
+
+####### Plex and Tautiilli
+
+  - platform: tautulli
+    api_key: 7e41110679514be2bf64ab1e8ad56939
+    host: 192.168.1.20
+
+
 
   # - platform: mqtt
   #   name: Zigbee2mqtt Networkmap
@@ -231,7 +239,3 @@
         unit_of_measurement: '%'
         icon_template: mdi:cellphone-android
 
-##############################
-
-  # - platform: openhardwaremonitor
-  #   host: 192.168.1.101

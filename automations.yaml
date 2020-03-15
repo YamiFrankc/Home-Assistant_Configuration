@@ -1,12 +1,3 @@
-- id: update_networkmap
-  alias: Zigbee Map aktualisieren
-  trigger:
-  - hours: '1'
-    platform: time_pattern
-    seconds: '0'
-  action:
-  - service: zigbee2mqtt_networkmap.update
-  hide_entity: true
 - alias: Zigbee2mqtt Log Level
   initial_state: 'on'
   trigger:
@@ -107,18 +98,6 @@
   - data:
       entity_id: light.luz_bano
     service: light.turn_on
-- id: '1558509978797'
-  alias: Luz pasillo off
-  trigger:
-  - entity_id: binary_sensor.0x00158d000257f589_occupancy
-    for: 00:01:00
-    platform: state
-    to: 'off'
-  condition: []
-  action:
-  - data:
-      entity_id: light.0xf0d1b80000037209_light
-    service: light.turn_off
 - id: '1558510043368'
   alias: luz bano - off
   trigger:
@@ -131,17 +110,6 @@
   - data:
       entity_id: light.luz_bano
     service: light.turn_off
-- id: '1558510472016'
-  alias: New home assistant update
-  trigger:
-  - entity_id: updater.updater
-    platform: state
-  condition: []
-  action:
-  - data:
-      message: Home Assistant  {{ states.updater.updater.state }}  is now available.
-      title: HA Update
-    service: notify.casa
 - id: '1560761839440'
   alias: Frank luces - on
   trigger:
@@ -221,3 +189,51 @@
   - data:
       entity_id: scene.frank_cama
     service: scene.turn_on
+- id: '1582445437430'
+  alias: Turn on lavanderia with motion
+  description: Turn on lavanderia lights with motion
+  trigger:
+  - entity_id: binary_sensor.0x00158d00028ab4a8_occupancy
+    platform: state
+    to: 'on'
+  condition: []
+  action:
+  - entity_id: group.luz_lavado
+    service: homeassistant.turn_on
+- id: '1582445667146'
+  alias: Turn OFF lavanderia  if no motion
+  description: Turn OFF ligths in lavanderia if no motion detected for 5 minutes
+  trigger:
+  - entity_id: binary_sensor.0x00158d00028ab4a8_occupancy
+    for: 0:05:10
+    platform: state
+    to: 'off'
+  condition: []
+  action:
+  - data:
+      entity_id: group.luz_lavado
+    entity_id: group.luz_lavado
+    service: homeassistant.turn_off
+- id: '1583829898117'
+  alias: '[new] turn off lavado when no motion'
+  description: ''
+  trigger:
+  - entity_id: group.luz_lavado
+    for: 0:00:10
+    platform: state
+    to: 'on'
+  condition:
+  - condition: device
+    device_id: fadb39f69c0d4d2b838659c689f97c39
+    domain: binary_sensor
+    entity_id: binary_sensor.0x00158d00028ab4a8_occupancy
+    for:
+      hours: 0
+      minutes: 10
+      seconds: 10
+    type: is_no_motion
+  action:
+  - data:
+      entity_id: group.luz_lavado
+    entity_id: group.luz_lavado
+    service: homeassistant.turn_off

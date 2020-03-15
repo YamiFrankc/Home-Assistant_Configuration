@@ -5,16 +5,39 @@ This is my configuration for Home Assistant. Its probably very basic. For automa
 But I'm planning to move everything to Node-Red.
 
 ## Custom Lovelace cards
-|Card name| What for|
-|-------| --------|
-| Aftership Card| I use this card to neatly display the packages I am tracking |
-|Compact Custom Header| Makes the header slim and cool|
-|Button card| This makes Lovelace so prettier!|
-|Mini Graph Card| I like how it looks|
-| Mini media Player | Looks so much cooler than the default one|
+| Card name             | What for                                  |
+| --------------------- | ----------------------------------------- |
+| Compact Custom Header | Makes the header slim and cool            |
+| Button card           | This makes Lovelace so prettier!          |
+| Mini Graph Card       | I like how it looks                       |
+| Mini media Player     | Looks so much cooler than the default one |
+
+
+##  Devices used
+
+| Device                            | how many |
+| --------------------------------- | -------- |
+| Sonoff Basic (Tasmota)            | 1        |
+| Sonoff Basic (ESPhome)            | 2        |
+| Xiaomi Aqara Temp sensor          | 2        |
+| Xiaomi Aqara motion sensor        | 3        |
+| Diferent Zigbee light bulbs       | 8        |
+| Hamptom Bay Zigbee CEiling fan    | 1        |
+| Door sensor                       | 2        |
+| Google Home mini                  | 1        |
+| Google Home Hub                   | 2        |
+| Xiaomi Aqara Buttons              | 2        |
+| Zigbee wireless button controller | 1        |
+| LIFX Z led strip                  | 1        |
+| Blink Camera                      | 1        |
+
+
+
 
 
 ## Screenshots
+
+Comming some day
 
 ## Rough list and description of devices [ TODO: Do this right]
 
@@ -28,7 +51,7 @@ I have a Zigbee2MQTT network, which uses Zigbee everything from here on is on th
 
 Two Xiaomi Aqara motion sensors. To automatically turn on the light in the hallway and in the bathroom. I have a couple more but no idea of where to use them.
 
- Two Xiaomi Aqara temperature sensors. Mainly 'just to have them' , but I want to add them to automations in some way. One is in the bathroom and another one in my room.
+Two Xiaomi Aqara temperature sensors. Mainly 'just to have them' , but I want to add them to automations in some way. One is in the bathroom and another one in my room.
 
 4 Sylvania light bulbs. Scattered around the house, they only support dimming.
 

@@ -98,3 +98,26 @@
         value_template: "{{ state_attr('device_tracker.life360_pa', 'battery_charging') }}"
         friendly_name: 'Bateria Pa'
         icon_template: mdi:battery-charging
+
+## LIFE360, are you driving?
+
+  - platform: template
+    sensors:
+      moving_android_yami:
+        value_template: "{{ state_attr('device_tracker.life360_frank', 'moving') }}"
+        friendly_name: 'Moving Android Yami'
+        icon_template: mdi:battery-charging
+
+  - platform: template
+    sensors:
+      moving_ma:
+        value_template: "{{ state_attr('device_tracker.life360_ma', 'moving') }}"
+        friendly_name: 'Moving Ma'
+        icon_template: mdi:battery-charging
+
+  - platform: template
+    sensors:
+      moving_pa:
+        value_template: "{{ state_attr('device_tracker.life360_pa', 'moving') }}"
+        friendly_name: 'Moving Pa'
+        icon_template: mdi:battery-charging
