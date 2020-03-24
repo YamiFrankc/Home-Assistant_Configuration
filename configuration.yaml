@@ -44,6 +44,12 @@ history:
 logbook:
 
 
+telegram_bot:
+  - platform: polling
+    api_key: !secret telegram_api_key
+    allowed_chat_ids:
+      - !secret telegram_chat_ID_1
+
 
 
 influxdb:
@@ -104,6 +110,10 @@ notify:
   - name: Casa
     platform: simplepush
     device_key: !secret simplepush_device_key
+  
+  - name: Telegram_bot
+    platform: telegram
+    chat_id: !secret telegram_chat_ID_1
 
 
 # Enables the frontend
