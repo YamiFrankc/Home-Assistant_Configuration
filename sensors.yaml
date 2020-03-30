@@ -32,8 +32,25 @@
       - visibility
     scan_interval:
       minutes: 5
+ 
+ ## This template sensor is ti have the AVG temp. of the home
+#   - platform: template
+#     sensors:
+#       avg_temp:
+#         friendly_name: "Temperatura Promedio"
+#         unit_of_measurement: 'degrees'
+#         value_template: {{ ((float(states('sensor.0x00158d0002726443_temperature')) +
+#      float(states('sensor.0x00158d0002c8cc86_temperature')) +
+#      float(states('sensor.0x00158d00022ffc8e_temperature'))) / 3) | round(2)
+# }}
 
-
+  - platform: min_max
+    type: mean
+    name: "Temperatura promedio"
+    entity_ids:
+     - sensor.0x00158d00022ffc8e_temperature
+     - sensor.0x00158d0002c8cc86_temperature
+     - sensor.0x00158d0002726443_temperature
 
 ####### Plex and Tautiilli
 
